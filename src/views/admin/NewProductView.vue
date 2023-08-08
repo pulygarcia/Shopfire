@@ -1,5 +1,9 @@
 <script setup>
-    import Link from '../../components/Link.vue';
+    import Link from '@/components/Link.vue';
+
+    import useImage from '@/composables/useImage';
+
+    const {onFileChange, imageUploaded, url} = useImage();
 </script>
 
 <template>
@@ -17,6 +21,7 @@
                 <FormKit
                     type="form"
                     submit-label="Agregar producto"
+                    incomplete-message="Por favor completa los campos"
                 >
                     <FormKit 
                         type="text"
@@ -34,7 +39,13 @@
                         validation="required"
                         :validation-messages="{required: 'La imagen es obligatoria'}"
                         accept=".jpg"
+                        @change="onFileChange"
                     />
+
+                    <div v-if="imageUploaded">
+                        <p class="font-black">Imagen producto: </p>
+                        <img :src="url" class="w-32" alt="Nuevo producto imagen"/>
+                    </div>
 
                     <FormKit 
                         type="select"
