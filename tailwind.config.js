@@ -2,11 +2,14 @@
 module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{vue,js,jsx,ts,tsx}"
+    "./src/**/*.{vue,js,jsx,ts,tsx}",
+    "./formkit.config.js"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
 
