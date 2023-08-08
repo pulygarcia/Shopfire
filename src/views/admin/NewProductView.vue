@@ -10,7 +10,7 @@
             Volver
         </Link>
 
-        <h1 class="my-10 font-black text-3xl">Nuevo producto</h1>
+        <h1 class="my-5 font-black text-3xl">Nuevo producto</h1>
 
         <div class="flex justify-center bg-white shadow-lg">
             <div class="mt-10 p-10 w-full 2xl:w-2/4">
