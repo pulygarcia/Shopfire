@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="mt-10">
+  <div class="mt-14 md:mt-10">
     <Link
       to="new-product"
     >
