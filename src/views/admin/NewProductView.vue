@@ -1,4 +1,6 @@
 <script setup>
+    import {useRouter} from 'vue-router'
+
     import {reactive} from 'vue';
 
     import Link from '@/components/Link.vue';
@@ -6,6 +8,8 @@
     import useImage from '@/composables/useImage';
 
     import {useProductsStore} from '@/stores/useProductsStore';
+
+    const router = useRouter();
 
     const {onFileChange, imageUploaded, url} = useImage();
 
@@ -25,9 +29,11 @@
 
         try {
             await products.createProduct({
-            ...values,
-            image: url.value
-        })
+                ...values,
+                image: url.value
+            })
+
+            router.push({name: 'products'})
         } catch (error) {
             console.log(error);
         }
