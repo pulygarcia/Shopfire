@@ -16,7 +16,9 @@
 
     <h1 class="my-10 text-4xl font-black">Productos</h1>
 
-    <ul role="list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <p v-if="products.noResult" class="text-red-600 mt-10 font-bold">No se encontraron resultados</p>
+
+    <ul v-else role="list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       <Product
         v-for="product in products.productsCollection" 
         :key="product.id"
