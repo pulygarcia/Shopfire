@@ -4,9 +4,9 @@
 </script>
 
 <template>
-  <header class="py-10 px-10 flex flex-col md:flex-row justify-between bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900 absolute top-0 w-full z-10">
+  <header class="py-10 px-10 flex flex-col md:flex-row justify-between bg-gradient-to-r from-gray-700 via-gray-900 to-black absolute top-0 w-full z-10">
     <div>
-        <h1 class="text-3xl text-white font-extrabold mb-4 md:mb-0">Administración</h1>
+        <h1 class="text-3xl text-white font-extrabold mb-4 md:mb-0">Admin <span class="text-teal-500">Panel</span></h1>
     </div>
 
     <nav class="flex">
