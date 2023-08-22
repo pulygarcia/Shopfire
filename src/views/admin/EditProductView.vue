@@ -10,7 +10,16 @@
 
     const { onFileChange, url, isImageUploaded } = useImage()
 
-    const products = useProductsStore()
+    const products = useProductsStore();
+
+    const router = useRouter();
+
+    //Consultar firestore
+    const route = useRoute();  //Obtener el id por la Url
+    const db = useFirestore();
+    const docRef = doc(db, 'productos', route.params.id);
+    const product = useDocument(docRef);
+
 
     const formData = reactive({
         name: '',
@@ -19,6 +28,28 @@
         availability: '',
         image: ''
     })
+
+    watch(product, (product) => {
+        //If there isnt product, return user to products view
+        if(!product){
+            router.push({name: 'products'});
+
+            return;
+        }
+        
+        //Fill the form
+        Object.assign(formData, product);
+    })
+
+    const submitHandler = async (data) => {
+        try {
+            await products.updateProduct(docRef, {...data, url});
+
+            router.push({name: 'products'})
+        } catch (error) {
+            console.log(error);
+        }
+    }
 </script>
 <template>
     <div class="mt-10">
