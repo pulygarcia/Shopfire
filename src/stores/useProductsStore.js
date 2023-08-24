@@ -72,10 +72,16 @@ export const useProductsStore = defineStore('products', () => {
     })
 
 
+    const filteredProducts = computed(() => {
+        return productsCollection.value;
+    })
+
+
     return{
         createProduct,
         updateProduct,
         deleteProduct,
+        filteredProducts,
         productsCollection,
         noResult,
         categoryOptions
