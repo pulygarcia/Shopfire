@@ -20,7 +20,10 @@
             <h3 class="text-gray-800">{{ product.name }}</h3>
             <p class="font-semibold">{{ formatCurrency(product.price) }}</p>
 
-            <select class="border-none py-1 rounded w-32">
+            <select 
+                class="border-none py-1 rounded w-32"
+                @change="cartStore.updateQuantity(product.id, +$event.target.value)"
+            >
                 <option 
                     v-for="n in cartStore.checkProductAvailability(product)"
                     :value="n"

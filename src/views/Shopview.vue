@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <aside class="lg:w-1/3 lg:h-screen lg:overflow-y-scroll pt-32 px-10">
+    <aside class="lg:w-1/3 lg:h-screen lg:overflow-y-scroll py-32 px-10">
       <ShoppingCart />
     </aside>
   </main>
