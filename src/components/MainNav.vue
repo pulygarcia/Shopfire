@@ -24,7 +24,7 @@
                         type="radio" 
                         :value="category.id" 
                         name="category" 
-                        class="h-4 w-4 text-teal-500"
+                        class="h-4 w-4 text-teal-500 rounded"
                         :checked="products.selectedCategory === category.id"
                         @change="products.selectedCategory = category.id"
                     >
