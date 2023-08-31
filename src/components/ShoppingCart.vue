@@ -31,13 +31,13 @@
             <Amount>
                 <template #label>Impuestos: </template>
 
-                {{ formatCurrency(0) }}
+                {{ formatCurrency(cartStore.taxes) }}
             </Amount>
 
             <Amount>
                 <template #label>Total a pagar: </template>
 
-                {{ formatCurrency(0) }}
+                {{ formatCurrency(cartStore.total) }}
             </Amount>
         </dl>
     </div>

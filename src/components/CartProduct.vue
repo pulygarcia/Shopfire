@@ -23,6 +23,7 @@
             <select 
                 class="border-none py-1 rounded w-32"
                 @change="cartStore.updateQuantity(product.id, +$event.target.value)"
+                :value="product.quantity"
             >
                 <option 
                     v-for="n in cartStore.checkProductAvailability(product)"

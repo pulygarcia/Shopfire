@@ -4,7 +4,7 @@
             <slot name="label" />
         </dt>
 
-        <dd class="text-gray-900">
+        <dd class="text-gray-900 underline">
             <slot></slot>
         </dd>
     </div>
