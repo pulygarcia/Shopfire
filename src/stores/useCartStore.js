@@ -58,10 +58,17 @@ export const useCartStore = defineStore('cart', () => {
         return (product) => product.availability < 5 ? product.availability : 5;
     })
 
+    const deleteProduct = (id) => {
+        if(confirm('¿Desea eliminar el producto del carrito?')){
+            cart.value = cart.value.filter(product => product.id !== id);
+        }
+    }
+
     return{
         cart,
         addToCart,
         updateQuantity,
+        deleteProduct,
         subtotal,
         taxes,
         total,
