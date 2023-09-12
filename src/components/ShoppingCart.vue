@@ -37,7 +37,7 @@
                 {{ formatCurrency(cartStore.taxes) }}
             </Amount>
 
-            <Amount>
+            <Amount v-if="couponStore.isValidCoupon">
                 <template #label>Descuento: </template>
 
                 {{ formatCurrency(couponStore.discount) }}

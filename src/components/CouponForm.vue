@@ -15,7 +15,7 @@
             v-model="couponStore.couponInput"
         >
 
-        <button @click="couponStore.applyCoupon()" type="button" class="p-3 bg-teal-500 font-bold hover:bg-teal-600 transition text-white">Canjear</button>
+        <button @click="couponStore.applyCoupon()" :disabled="couponStore.isValidCoupon" type="button" class="p-3 bg-teal-500 font-bold hover:bg-teal-600 transition text-white disabled:opacity-30">Canjear</button>
     </div>
 
     <p v-if="couponStore.couponValidation" class="text-gray-500 mt-4 text-center font-bold">{{ couponStore.couponValidation }}</p>
