@@ -51,5 +51,8 @@
         </dl>
 
         <CouponForm />
+
+        <button @click="cartStore.checkout" type="button" class="mt-10 w-full py-2 bg-violet-600 text-white font-bold hover:bg-violet-800 transition rounded">Comprar</button>
+
     </div>
 </template>

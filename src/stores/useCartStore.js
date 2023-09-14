@@ -1,12 +1,16 @@
 import { defineStore } from "pinia";
-import {ref, computed, watch, watchEffect} from 'vue';
+import {ref, computed, watchEffect} from 'vue';
+import {collection, addDoc} from 'firebase/firestore'
+import {useFirestore} from 'vuefire'
 import {useCouponStore} from '../stores/useCouponStore';
+import {getCurrentDate} from '../helpers'
 
 
 export const useCartStore = defineStore('cart', () => {
     const couponStore = useCouponStore();
 
     const cart = ref([]);
+    const db = useFirestore();
     const subtotal = ref(0);
     const taxes = ref(0);
     const total = ref(0);
@@ -42,8 +46,8 @@ export const useCartStore = defineStore('cart', () => {
 
     watchEffect(() => {
         subtotal.value = cart.value.reduce((total, product) => total + (product.price * product.quantity), 0);
-        taxes.value = subtotal.value * TAX_RATE;
-        total.value = (subtotal.value + taxes.value) - couponStore.discount;
+        taxes.value = Number(subtotal.value * TAX_RATE);
+        total.value = Number((subtotal.value + taxes.value) - couponStore.discount);
     })
 
 
@@ -65,11 +69,32 @@ export const useCartStore = defineStore('cart', () => {
         }
     }
 
+
+    //Sales
+    async function checkout(){
+        try {
+            await addDoc(collection(db, 'sales'), {
+                cart: cart.value.map(item => {
+                    const {availability, category, ...data} = item; //extract innecesary data to add
+                    return data; //add necesary data
+                }),
+                subtotal: subtotal.value,
+                taxes: taxes.value,
+                discount: couponStore.discount,
+                total: total.value,
+                date: getCurrentDate()
+            }) 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return{
         cart,
         addToCart,
         updateQuantity,
         deleteProduct,
+        checkout,
         subtotal,
         taxes,
         total,
