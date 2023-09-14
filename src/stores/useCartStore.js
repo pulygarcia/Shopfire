@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import {ref, computed, watchEffect} from 'vue';
-import {collection, addDoc} from 'firebase/firestore'
+import {collection, addDoc, runTransaction, doc } from 'firebase/firestore'
 import {useFirestore} from 'vuefire'
 import {useCouponStore} from '../stores/useCouponStore';
 import {getCurrentDate} from '../helpers'
@@ -83,7 +83,28 @@ export const useCartStore = defineStore('cart', () => {
                 discount: couponStore.discount,
                 total: total.value,
                 date: getCurrentDate()
-            }) 
+            })
+
+            //update product availability with fb transaction update
+            cart.value.forEach(async product => {
+                const productRef = doc(db, 'productos', product.id);  //product reference in fb
+                await runTransaction(db, async(transaction) => {
+                    const currentProduct = await transaction.get(productRef);
+                    const availabilityUpdated = currentProduct.data().availability - product.quantity; //Change availability here
+                    transaction.update(productRef, {availability: availabilityUpdated});
+                }) 
+            })
+            
+
+            //restart state
+            cart.value = [];
+            subtotal.value = 0;
+            taxes.value = 0;
+            total.value = 0;
+
+            //Restart coupon too
+            couponStore.reset();
+
         } catch (error) {
             console.log(error);
         }
