@@ -75,6 +75,7 @@ export const useProductsStore = defineStore('products', () => {
 
 
     const filteredProducts = computed(() => {
+        //Double filter to remove products from this view when the product isnt available (or doesnt have stock)
         return productsCollection.value.filter(product => product.category === selectedCategory.value).filter(product => product.availability >= 1);
     })
 
