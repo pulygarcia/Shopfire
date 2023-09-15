@@ -25,7 +25,8 @@
 
         <p class="bg-green-500 text-white font-bold inline-block px-1 my-3 rounded">{{ formatCurrency( product?.price ) }}</p>
         <p v-if="product.availability > 1">Disponibles: {{ product?.availability }}</p>
-        <p v-else class="text-yellow-500 font-bold">Ultimo disponible</p>
+        <p v-else-if="product.availability === 1" class="text-yellow-500 mt-3">¡Ultimo disponible!</p>
+        <p v-else-if="product.availability < 1" class="text-red-500 uppercase mt-3">Sin stock</p>
     </div>
 
     <div>

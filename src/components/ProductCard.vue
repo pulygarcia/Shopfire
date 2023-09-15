@@ -20,7 +20,8 @@
     <h3 class="text-gray-500 text-lg font-bold">{{ product.name }}</h3>
 
     <p v-if="product.availability > 1" class="mt-3">Disponibles: {{ product?.availability }}</p>
-    <p v-else class="text-yellow-500 mt-3">¡Ultimo disponible!</p>
+    <p v-else-if="product.availability === 1" class="text-yellow-500 mt-3">¡Ultimo disponible!</p>
+    <p v-else-if="product.availability < 1" class="text-red-500 mt-3">No disponible</p>
 
     <button 
       type="button" 
