@@ -36,7 +36,7 @@
 
     <nav class="mt-5 md:mt-0">
         <Link
-            to="admin"
+            to="sales"
         >
             Admin
         </Link>
