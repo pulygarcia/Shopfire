@@ -2,6 +2,8 @@
   import {ref} from 'vue';
   import VueTailwindDatepicker from 'vue-tailwind-datepicker';
   import {useSalesStore} from '../../stores/useSalesStore';
+  import SaleDetails from '../../components/SaleDetails.vue';
+  import {formatCurrency} from '../../helpers'
 
   const salesStore = useSalesStore();
 
@@ -9,6 +11,8 @@
     date: 'DD/MM/YYYY',
     month: 'MMM'
   })
+
+  console.log(salesStore.salesCollection);
 </script>
 
 <template>
@@ -25,10 +29,23 @@
         />
       </div>
 
-      <div class="md:w-2/3">
-        <p v-if="salesStore.isDateSelected" class="text-center text-lg">Ventas de la Fecha: <span class="font-black">{{ salesStore.date }}</span></p>
+      <div v-if="salesStore.salesCollection.length > 0" class="md:w-2/3 md:h-screen md:overflow-y-scroll">
+        <p v-if="salesStore.isDateSelected" class="text-center text-xl mt-6 md:mt-0">Ventas de la Fecha: <span class="font-black">{{ salesStore.date }}</span></p>
 
         <p v-else class="text-center text-lg text-red-500">Seleccioná una fecha</p>
+
+        <div class="space-y-5">
+          <p class="mt-5 text-lg text-right">Total recaudado en la fecha: <span class="font-extrabold bg-green-300 p-1 rounded">{{ formatCurrency(salesStore.totalSalesOfDay) }}</span></p>
+
+          <SaleDetails 
+            v-for="sale in salesStore.salesCollection" 
+            :key="sale.id" 
+            :sale="sale"
+          />
+        </div>
+
       </div>
+
+      <p v-else-if="salesStore.salesCollection.length > 0 && salesStore.isDateSelected" class="text-gray-700 text-center text-lg">No hubo ventas en la fecha seleccionada</p>
     </div>
 </template>
