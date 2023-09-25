@@ -105,6 +105,9 @@ export const useCartStore = defineStore('cart', () => {
             //Restart coupon too
             couponStore.reset();
 
+            //feedback
+            alert('Se realizó tu compra, revisa el panel de ventas.')
+
         } catch (error) {
             console.log(error);
         }
